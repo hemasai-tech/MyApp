@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View, Dimensions } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, Dimensions, DimensionValue } from 'react-native';
 const { width, height } = Dimensions.get("screen")
 
 export type ButtonProps = {
@@ -7,6 +7,7 @@ export type ButtonProps = {
   text: string;
   color?: string;
   textColor?: string;
+  btnWidth?: DimensionValue | undefined;
 };
 
 const styles = StyleSheet.create({
@@ -15,26 +16,26 @@ const styles = StyleSheet.create({
     paddingVertical: 18,
     paddingHorizontal: 36,
     alignSelf: 'center',
-    justifyContent:'center',
+    justifyContent: 'center',
     flexGrow: 0,
-    borderRadius:30,
+    borderRadius: 30,
     backgroundColor: 'purple',
   },
   buttonText: {
     color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
-    textAlign:'center'
+    textAlign: 'center'
   },
   buttonContainer: {
-    justifyContent:'center',
-    width:width * 0.9,
-  
+    justifyContent: 'center',
+    width: width * 0.9,
+
   },
 });
 
-export const MyButton = ({ text, onPress, color, textColor }: ButtonProps) => (
-  <View style={styles.buttonContainer}>
+export const MyButton = ({ text, onPress, color, textColor, btnWidth }: ButtonProps) => (
+  <View style={[styles.buttonContainer, !!btnWidth && { width: btnWidth }]}>
     <TouchableOpacity
       style={[styles.button, !!color && { backgroundColor: color }]}
       onPress={onPress}
